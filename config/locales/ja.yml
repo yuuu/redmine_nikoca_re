@@ -1,0 +1,14 @@
+ja:
+  label_redmine_nikoca_re: "ニコカレ"
+  project_module_redmine_nikoca_re: "ニコカレ"
+  permission_view_redmine_nikoca_re: "ニコカレの閲覧"
+  permission_manage_redmine_nikoca_re: "ニコカレの記入"
+  label_conditions_new: "本日の気分を入力する"
+  field_user: "ユーザ"
+  field_date: "日付"
+  field_feeling: "気分"
+  field_comment: "一言コメント"
+  good: "良い"
+  normal: "普通"
+  bad: "悪い"
+

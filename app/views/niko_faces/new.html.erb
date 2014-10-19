@@ -1,0 +1,6 @@
+<h2>NikoFacesController#new</h2>
+
+<%= form_for @niko_face, {:url => project_niko_faces_path(@project)} do |f| %>
+  <%= render :partial => 'niko_faces/form', :locals => {:form => f} %>
+  <%= f.submit l(:button_create) %>
+<% end %>
