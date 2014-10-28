@@ -1,29 +1,32 @@
 <style type="text/css">
 <!--
-div.username{
-  width: 10%;
-  overflow: visible;
+table.username{
+  width: 15%;
   float: left;
-}
-div.calender{
-  width: 85%;
   overflow: visible;
-  position: relative;
+  border: 1px solid #e4e4e4;
+  border-collapse: collapse;
 }
-div.username table{
-  width: 100%;
-}
-div.calender table{
-  width: 100%;
+table.calender{
+  width: 80%;
   table-layout: fixed;
+  overflow: visible;
+  border: 1px solid #e4e4e4;
+  border-collapse: collapse;
 }
-div.username td{
+table.username th{
+  background-color:#EEEEEE;
+}
+table.calender th{
+  background-color:#EEEEEE;
+}
+table.username td{
   padding: 0;
   height: 40px;
   text-align: center;
   vertical-align: middle;
 }
-div.calender td{
+table.calender td{
   padding: 0;
   border-right: solid 1px #eeeeee;
   height: 40px;
@@ -64,6 +67,10 @@ div.calender td{
 span:hover + .arrow_box{
   display: block;
 }
+span.responseinfo{
+  font-size: 80%;
+  color: #808080;
+}
 //-->
 </style>
 
@@ -74,8 +81,7 @@ span:hover + .arrow_box{
 </div>
 
 <h2>メンバーの気分</h2>
-<div class="username">
-<table class="list">
+<table class="username">
   <thead>
     <tr>
       <th>ユーザ名</th>
@@ -88,10 +94,8 @@ span:hover + .arrow_box{
       </tr>
     <% end %>
 </table>
-</div>
 
-<div class="calender">
-<table class="list">
+<table class="calender">
   <thead>
     <tr>
       <% @days.each do |date| %>
@@ -118,7 +122,15 @@ span:hover + .arrow_box{
           <% feeling = face.feeling %>
           <span><%= link_to(image_tag(face_icon[feeling], :plugin => 'nikoca_re', :width => "32", :height => "32", 
                             :alt => l(feeling_label[feeling])),project_niko_face_path(@project, face.id)) %></span>
-          <div class="arrow_box"><%= face.comment %></div>
+          <div class="arrow_box">
+            <%= (face.comment != '') ? face.comment : '(空)' %>
+            <% if !face.responses.empty?%>
+              <br />
+              <span class="responseinfo">
+                <%= "コメント: #{face.responses.size}件" %>
+              </span>
+            <%end%>
+          </div>
         <% end %>
         </td>
       <% end %>
@@ -126,6 +138,5 @@ span:hover + .arrow_box{
     <% end %>
   </tbody>
 </table>
-</div>
 
 
