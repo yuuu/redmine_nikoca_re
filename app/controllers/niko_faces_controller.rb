@@ -12,8 +12,15 @@ class NikoFacesController < ApplicationController
     @days = Array.new
     @niko_faces = Hash.new
 
+    # 表示開始日を計算する
+    if params[:id] == nil
+      date = Date.today - (DAY_OF_WEEK * DISP_WEEK_NUM) + 1
+    else
+      @backnumber = params[:id].to_i
+      date = Date.today - ((DAY_OF_WEEK * DISP_WEEK_NUM) * (@backnumber + 1) ) + 1
+    end
+
     # 表示する期間の日付を@daysへ格納
-    date = Date.today - (DAY_OF_WEEK * DISP_WEEK_NUM) + 1
     (DISP_WEEK_NUM * DAY_OF_WEEK).times do
       @days << date
       date = date + 1

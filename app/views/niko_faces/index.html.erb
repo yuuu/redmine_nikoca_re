@@ -1,5 +1,13 @@
 <style type="text/css">
 <!--
+.backnumber{
+  padding: 0.5%;
+}
+.backnumber a{
+  padding-right: 1%;
+  padding-left: 1%;
+  font-size: 120%;
+}
 table.username{
   width: 10%;
   float: left;
@@ -52,7 +60,7 @@ table.calender td{
 }
 .arrow_box:after{
   position: absolute;
-  bottom: 95%;
+  bottom: 100%;
   left: 30%;
   width: 0;
   height: 0;
@@ -81,6 +89,16 @@ span.responseinfo{
 </div>
 
 <h2>ニコニコカレンダー</h2>
+<div class="backnumber">
+  <% if @backnumber == nil %>
+    <%= link_to('<< 古いカレンダーへ', project_niko_faces_backnumber_path(@project, 1)) %>
+  <% elsif @backnumber == 0 %>
+    <%= link_to('<< 古いカレンダーへ', project_niko_faces_backnumber_path(@project, 1)) %>
+  <% else%>
+    <%= link_to('<< 古いカレンダーへ', project_niko_faces_backnumber_path(@project, @backnumber + 1)) %>
+    <%= link_to('新しいカレンダーへ >>', project_niko_faces_backnumber_path(@project, @backnumber - 1)) %>
+  <% end %>
+</div>
 <table class="username">
   <thead>
     <tr>
@@ -98,13 +116,24 @@ span.responseinfo{
 <table class="calender">
   <thead>
     <tr>
+      <% first_day = true %>
       <% @days.each do |date| %>
+        <% if date.day == 1 %>
+          <% date_s = date.month.to_s + "/" + date.day.to_s %>
+          <% first_day = false %>
+        <% elsif first_day %>
+          <% date_s = date.month.to_s + "/" + date.day.to_s %>
+          <% first_day = false %>
+        <%else%>
+          <% date_s = date.day.to_s %>
+        <% end %>
+
         <% if date.wday == 0  %>
-          <th class="sunday"><%= date.day %></th>
+          <th class="sunday"><%= date_s %></th>
         <% elsif date.wday == 6 %>
-          <th class="saturday"><%= date.day %></th>
+          <th class="saturday"><%= date_s %></th>
         <% else %>
-          <th><%= date.day %></th>
+          <th><%= date_s %></th>
         <% end %>
       <% end %>
     </tr>
