@@ -1,14 +1,14 @@
 <style type="text/css">
 <!--
 table.username{
-  width: 15%;
+  width: 10%;
   float: left;
   overflow: visible;
   border: 1px solid #e4e4e4;
   border-collapse: collapse;
 }
 table.calender{
-  width: 80%;
+  width: 75%;
   table-layout: fixed;
   overflow: visible;
   border: 1px solid #e4e4e4;
@@ -52,7 +52,7 @@ table.calender td{
 }
 .arrow_box:after{
   position: absolute;
-  bottom: 100%;
+  bottom: 95%;
   left: 30%;
   width: 0;
   height: 0;
@@ -80,7 +80,7 @@ span.responseinfo{
                                 :class => 'icon icon-add') %>
 </div>
 
-<h2>メンバーの気分</h2>
+<h2>ニコニコカレンダー</h2>
 <table class="username">
   <thead>
     <tr>
@@ -120,7 +120,7 @@ span.responseinfo{
           <% face_icon = {1 => 'good.png', 2 => 'normal.png', 3 => 'bad.png'} %>
           <% feeling_label = {1 => :good, 2 => :normal, 3 => :bad} %>
           <% feeling = face.feeling %>
-          <span><%= link_to(image_tag(face_icon[feeling], :plugin => 'nikoca_re', :width => "32", :height => "32", 
+          <span><%= link_to(image_tag(face_icon[feeling], :plugin => 'redmine_nikoca_re', :width => "32", :height => "32", 
                             :alt => l(feeling_label[feeling])),project_niko_face_path(@project, face.id)) %></span>
           <div class="arrow_box">
             <%= (face.comment != '') ? face.comment : '(空)' %>

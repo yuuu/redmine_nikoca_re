@@ -13,7 +13,7 @@ class NikoFacesController < ApplicationController
     @niko_faces = Hash.new
 
     # 表示する期間の日付を@daysへ格納
-    date = Date.today - Date.today.wday - DAY_OF_WEEK
+    date = Date.today - (DAY_OF_WEEK * DISP_WEEK_NUM) + 1
     (DISP_WEEK_NUM * DAY_OF_WEEK).times do
       @days << date
       date = date + 1
