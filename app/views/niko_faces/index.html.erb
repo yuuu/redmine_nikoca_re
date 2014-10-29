@@ -152,7 +152,7 @@ span.responseinfo{
           <span><%= link_to(image_tag(face_icon[feeling], :plugin => 'redmine_nikoca_re', :width => "32", :height => "32", 
                             :alt => l(feeling_label[feeling])),project_niko_face_path(@project, face.id)) %></span>
           <div class="arrow_box">
-            <%= (face.comment != '') ? face.comment : '(空)' %>
+            <%= (face.comment != '') ? face.comment : '(未投稿)' %>
             <% if !face.responses.empty?%>
               <br />
               <span class="responseinfo">
