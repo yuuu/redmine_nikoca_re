@@ -1,0 +1,17 @@
+<div class="contextual">
+    <%= link_to_if_authorized(l(:label_conditions_new), 
+                                {:action => 'new', :project_id => @project}, 
+                                :class => 'icon icon-add') %>
+</div>
+
+<h2>ニコニコカレンダー</h2>
+<div class="backnumber">
+  <% if @backnumber == 0 %>
+    <%= link_to('<< 古いカレンダーへ', project_niko_faces_backnumber_path(@project, 1)) %>
+  <% else%>
+    <%= link_to('<< 古いカレンダーへ', project_niko_faces_backnumber_path(@project, @backnumber + 1)) %>
+    <%= link_to('新しいカレンダーへ >>', project_niko_faces_backnumber_path(@project, @backnumber - 1)) %>
+  <% end %>
+</div>
+
+<%= render :partial => 'niko_faces/calender' %>

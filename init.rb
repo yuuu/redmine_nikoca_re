@@ -7,8 +7,8 @@ Redmine::Plugin.register :redmine_nikoca_re do
   author_url 'http://ylgbk.hatenablog.com/'
 
   project_module :redmine_nikoca_re do
-    permission :view_redmine_nikoca_re, :niko_faces => [:index, :show]
-    permission :manage_redmine_nikoca_re, :niko_faces => [:new, :edit, :create, :update, :destroy],
+    permission :view_redmine_nikoca_re, :niko_faces => [:index, :show, :backnumber]
+    permission :manage_redmine_nikoca_re, :niko_faces => [:new, :edit, :create, :update, :destroy, :backnumber],
                :require => :member
   end
 
