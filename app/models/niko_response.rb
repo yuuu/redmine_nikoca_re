@@ -1,6 +1,7 @@
 class NikoResponse < ActiveRecord::Base
   unloadable
 
+  validates_presence_of :comment
   validates_length_of :comment, :maximum => 128
 
   belongs_to :author, :class_name => 'User', :foreign_key => 'author_id'

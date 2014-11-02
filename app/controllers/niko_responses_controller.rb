@@ -4,13 +4,19 @@ class NikoResponsesController < ApplicationController
   before_filter :find_project
   before_filter :find_niko_face
 
+  def index
+    redirect_to project_niko_face_path(@project, @niko_face.id)
+  end
 
   def create
     @niko_response = NikoResponse.new(params[:niko_response])
     @niko_response.author = User.current
-    @niko_face.responses << @niko_response
-
-    redirect_to project_niko_face_path(@project, @niko_face.id)
+    if @niko_response.valid?
+      @niko_face.responses << @niko_response
+      redirect_to project_niko_face_path(@project, @niko_face.id)
+    else
+      render 'niko_faces/show'
+    end
   end
 
 private

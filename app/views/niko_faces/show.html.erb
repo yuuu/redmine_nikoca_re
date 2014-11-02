@@ -3,6 +3,11 @@
 <%= link_to(l(:button_edit),
     edit_project_niko_face_path(@project, @niko_face.id),
     :class => 'icon icon-edit') %>
+<%= link_to(l(:button_delete),
+    project_niko_face_path(@project, @niko_face.id),
+    :confirm => l(:text_are_you_sure),
+    :method => :delete,
+    :class => 'icon icon-del') %>
 <% end %>
 </div>
 <h2><%= @niko_face.date.to_s %>の気分</h2>

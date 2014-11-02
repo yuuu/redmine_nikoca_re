@@ -58,6 +58,11 @@ class NikoFacesController < ApplicationController
   def edit
   end
 
+  def destroy
+    @niko_face.destroy
+    redirect_to project_niko_faces_path(@project)
+  end
+
   def update 
     @niko_face.attributes = params[:niko_face]
     if @niko_face.valid?
