@@ -2,7 +2,7 @@ module NikoFacesHelper
   def link_comment_face_tag(project, face)
     if face != nil
       img_src = content_tag(:span) do
-        link_to(face_tag(face), project_niko_face_path(@project, face.id))
+        link_to(feeling_tag(face.feeling), project_niko_face_path(@project, face.id))
       end
       comment_src = content_tag(:div, :class => 'arrow_box') do
         concat(face.comment != '' ? face.comment : l(:no_comment))
@@ -16,16 +16,16 @@ module NikoFacesHelper
       end
       return concat(img_src + comment_src)
     else
-      return face_tag(face)
+      return feeling_tag(nil)
     end
   end
 
-  def face_tag(face)
+  def feeling_tag(feeling)
     options = {:plugin => 'redmine_nikoca_re', :width => '32', :height => '32'}
 
-    if face != nil
-      icon = ({1 => 'good.png', 2 => 'normal.png', 3 => 'bad.png'}[face.feeling])
-      label = ({1 => :good, 2 => :normal, 3 => :bad}[face.feeling])
+    if feeling != nil
+      icon = ({1 => 'good.png', 2 => 'normal.png', 3 => 'bad.png'}[feeling])
+      label = ({1 => :good, 2 => :normal, 3 => :bad}[feeling])
       options[:alt] = l(label)
       concat(image_tag(icon, options))
     else

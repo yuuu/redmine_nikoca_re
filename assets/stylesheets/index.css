@@ -78,4 +78,9 @@ span.responseinfo{
   font-size: 80%;
   color: #808080;
 }
+.team_row{
+  border-top: solid 1px #B0B0B0;
+  background-color: #F7F8E0;
+}
+
 

@@ -15,6 +15,9 @@
         <td class="yyy"><%= link_to_user(user) %></td>
       </tr>
     <% end %>
+    <tr class="<%= cycle('odd', 'even') %>">
+      <td class="yyy team_row"><%= l(:team_feeling) %></td>
+    </tr>
 </table>
 
 <table class="calender">
@@ -31,10 +34,16 @@
     <% @users.each do |user| %>
       <tr class="<%= cycle('odd', 'even') %>">
       <% @days.each do |date| %>
-        <td><% link_comment_face_tag(@project, @niko_faces[user.name][date.day]) %></td>
+        <td class="yyy"><% link_comment_face_tag(@project, @niko_faces[user.name][date.day]) %></td>
       <% end %>
       </tr>
     <% end %>
+
+    <tr class="<%= cycle('odd', 'even') %>">
+    <% @days.each do |date| %>
+      <td class="yyy team_row"><% feeling_tag(@team_feelings[date.day]) %></td>
+    <% end %>
+    </tr>
   </tbody>
 </table>
 

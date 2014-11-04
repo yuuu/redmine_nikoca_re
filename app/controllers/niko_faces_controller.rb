@@ -93,10 +93,12 @@ private
     @users = Array.new
     @days = Array.new
     @niko_faces = Hash.new
+    @team_feelings = Hash.new
 
     # 表示する期間の日付を@daysへ格納
     (DISP_WEEK_NUM * DAY_OF_WEEK).times do
       @days << start_date
+      @team_feelings[start_date.day] = 0.0
       start_date = start_date + 1
     end
 
@@ -115,6 +117,23 @@ private
 
       # メンバーの気分を格納
       @niko_faces[user.name] = faces
+    end
+
+    # チームの気分を判定する
+    @days.each do |day|
+      faces = Array.new
+      @users.each do|user|
+        faces += NikoFace.where(:date => day).where(:author_id => user.id)
+      end
+      if faces.size != 0
+        faces.each do |face|
+          @team_feelings[day.day] += face.feeling
+        end
+        @team_feelings[day.day] /= faces.size
+        @team_feelings[day.day] = @team_feelings[day.day].truncate.to_i
+      else
+        @team_feelings[day.day] = nil
+      end
     end
   end
 end
