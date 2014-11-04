@@ -11,4 +11,6 @@ ja:
   good: "良い"
   normal: "普通"
   bad: "悪い"
+  no_comment: "(未投稿)"
+  comment_unit: "件"
 
