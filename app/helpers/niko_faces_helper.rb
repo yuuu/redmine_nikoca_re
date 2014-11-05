@@ -16,7 +16,7 @@ module NikoFacesHelper
       end
       return concat(img_src + comment_src)
     else
-      return feeling_tag(nil)
+      return concat(feeling_tag(nil))
     end
   end
 
@@ -27,10 +27,10 @@ module NikoFacesHelper
       icon = ({1 => 'good.png', 2 => 'normal.png', 3 => 'bad.png'}[feeling])
       label = ({1 => :good, 2 => :normal, 3 => :bad}[feeling])
       options[:alt] = l(label)
-      concat(image_tag(icon, options))
+      image_tag(icon, options)
     else
       options[:alt] = l(:none)
-      concat(image_tag('none.png', options))
+      image_tag('none.png', options)
     end
   end
 

@@ -41,7 +41,7 @@
 
     <tr class="<%= cycle('odd', 'even') %>">
     <% @days.each do |date| %>
-      <td class="yyy team_row"><% feeling_tag(@team_feelings[date.day]) %></td>
+      <td class="yyy team_row"><% concat(feeling_tag(@team_feelings[date.day])) %></td>
     <% end %>
     </tr>
   </tbody>
