@@ -34,13 +34,11 @@ module NikoFacesHelper
     end
   end
 
-  def date_tag(date)
+  def date_tag(date, is_topday)
     if date.day == 1
       date_s = date.month.to_s + "/" + date.day.to_s
-      first_day = false
-    elsif first_day
+    elsif is_topday
       date_s = date.month.to_s + "/" + date.day.to_s
-      first_day = false
     else
       date_s = date.day.to_s
     end

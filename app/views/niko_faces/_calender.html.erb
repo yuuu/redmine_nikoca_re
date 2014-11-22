@@ -23,9 +23,8 @@
 <table class="calender">
   <thead>
     <tr>
-      <% first_day = true %>
       <% @days.each do |date| %>
-        <% date_tag(date) %>
+        <% date_tag(date, @days[0] == date) %>
       <% end %>
     </tr>
   </thead>
