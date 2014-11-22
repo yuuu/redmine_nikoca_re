@@ -4,13 +4,13 @@
                                 :class => 'icon icon-add') %>
 </div>
 
-<h2>ニコニコカレンダー</h2>
+<h2><%= l(:label_redmine_nikoca_re_full) %></h2>
 <div class="backnumber">
   <% if @backnumber == 0 %>
-    <%= link_to('<< 古いカレンダーへ', project_niko_faces_backnumber_path(@project, 1)) %>
+    <%= link_to('<< ' + l(:to_old), project_niko_faces_backnumber_path(@project, 1)) %>
   <% else%>
-    <%= link_to('<< 古いカレンダーへ', project_niko_faces_backnumber_path(@project, @backnumber + 1)) %>
-    <%= link_to('新しいカレンダーへ >>', project_niko_faces_backnumber_path(@project, @backnumber - 1)) %>
+    <%= link_to('<<' + l(:to_old), project_niko_faces_backnumber_path(@project, @backnumber + 1)) %>
+    <%= link_to(l(:to_new) + ' >>', project_niko_faces_backnumber_path(@project, @backnumber - 1)) %>
   <% end %>
 </div>
 

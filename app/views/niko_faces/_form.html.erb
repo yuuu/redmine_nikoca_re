@@ -1,6 +1,6 @@
 <%= error_messages_for 'niko_face' %>
 <div class="box">
-  <div><%= form.select(:feeling, {l(:good) => 1, l(:normal) => 2, l(:bad) => 3}, {:include_blank => '選択してください'}) %></div>
+  <div><%= form.select(:feeling, {l(:good) => 1, l(:normal) => 2, l(:bad) => 3}, {:include_blank => l(:item_select)}) %></div>
   <div><%= form.text_area :comment, {:cols => 80, :rows => 5} %></div>
 </div>
 

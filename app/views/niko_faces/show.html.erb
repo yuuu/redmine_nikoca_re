@@ -10,7 +10,7 @@
     :class => 'icon icon-del') %>
 <% end %>
 </div>
-<h2><%= @niko_face.date.to_s %>の気分</h2>
+<h2><%= @niko_face.date.to_s + l(:caption_feeling) %></h2>
 <p class="author">
 <%= authoring @niko_face.created_at, @niko_face.author %>.
 <% if @niko_face.created_at != @niko_face.updated_at %>
@@ -35,7 +35,7 @@
   <br />
 <% end %>
 <div class="box">
-<h4>コメント投稿フォーム</h4>
+<h4><%= l(:comment_form) %></h4>
 <%= form_for @niko_response, {:url => project_niko_face_niko_responses_path(@project, @niko_face)} do |f| %>
   <%= error_messages_for 'niko_response' %>
   <div><%= f.text_area :comment, {:cols => 80, :rows => 3} %></div>

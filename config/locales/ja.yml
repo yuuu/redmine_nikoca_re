@@ -1,10 +1,12 @@
 ja:
   label_redmine_nikoca_re: "ニコカレ"
+  label_redmine_nikoca_re_full: "ニコニコカレンダー"
   project_module_redmine_nikoca_re: "ニコカレ"
   permission_view_redmine_nikoca_re: "ニコカレの閲覧"
   permission_manage_redmine_nikoca_re: "ニコカレの記入"
   label_conditions_new: "本日の気分を入力する"
-  field_user: "ユーザ"
+  comment_form: "コメント投稿フォーム"
+  field_user: "ユーザ名"
   field_date: "日付"
   field_feeling: "気分"
   field_comment: "コメント"
@@ -14,4 +16,9 @@ ja:
   no_comment: "(未投稿)"
   comment_unit: "件"
   team_feeling: "チームの気分"
+  item_select: "選択してください"
+  caption_feeling: "の気分"
+  caption_today_feeling: "本日の気分"
+  to_old: "古いカレンダーへ"
+  to_new: "新しいカレンダーへ"
 
