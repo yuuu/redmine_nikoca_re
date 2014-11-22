@@ -6,4 +6,23 @@ class NikoResponse < ActiveRecord::Base
 
   belongs_to :author, :class_name => 'User', :foreign_key => 'author_id'
   belongs_to :response_to, :class_name => 'NikoFace', :foreign_key => 'niko_face_id'
+
+  def read
+    unread = self.unread
+    self.unread = false
+
+    if unread
+      begin
+        save
+      rescue ActiveRecord::StaleObjectError
+        reload
+        reschedule_on(date)
+        save
+      end
+    end
+  end
+
+  def is_unread?
+    self.unread
+  end
 end

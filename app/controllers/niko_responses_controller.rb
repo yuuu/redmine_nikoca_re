@@ -11,6 +11,7 @@ class NikoResponsesController < ApplicationController
   def create
     @niko_response = NikoResponse.new(params[:niko_response])
     @niko_response.author = User.current
+    @niko_response.unread = true
     if @niko_response.valid?
       @niko_face.responses << @niko_response
       redirect_to project_niko_face_path(@project, @niko_face.id)

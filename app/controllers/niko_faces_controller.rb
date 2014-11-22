@@ -51,6 +51,9 @@ class NikoFacesController < ApplicationController
   end
 
   def show
+    # レスをすべて既読とする
+    @niko_face.read_responses(User.current)
+
     # レス投稿用オブジェクト
     @niko_response = NikoResponse.new
   end
