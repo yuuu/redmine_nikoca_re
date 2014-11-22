@@ -9,14 +9,14 @@ redmine_nikoca_re is plugin to check the mood for project members.
 $ cd /path/to/redmine/plugins
 $ git clone https://github.com/yuuu/redmine_nikoca_re.git
 $ cd /path/to/redmine
-$ rake redmine:plugins:migrate NAME=redmine_nikoca_re
+$ rake redmine:plugins:migrate NAME=redmine_nikoca_re RAILS_ENV=production 
 (restart redmine)
 ```
 
 ## Uninstallation
 ```bash
 $ cd /path/to/redmine
-$ rake redmine:plugins:migrate NAME=redmine_nikoca_re VERSION=0
+$ rake redmine:plugins:migrate NAME=redmine_nikoca_re VERSION=0 RAILS_ENV=production 
 (restart redmine)
 ```
 ## Material sources
