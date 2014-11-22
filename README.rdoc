@@ -4,20 +4,25 @@ Niko-niko Calender plugin for Redmine.
 
 redmine_nikoca_re is plugin to check the mood for project members.
 
-== Requirements
-
 == Installation 
-1. cd /path/to/redmine/plugins
-2. git clone https://github.com/yuuu/redmine_nikoca_re.git
-3. cd /path/to/redmine
-4. rake redmine:plugins:migrate NAME=redmine_nikoca_re
-5. restart redmine
+```bash
+$ cd /path/to/redmine/plugins
+$ git clone https://github.com/yuuu/redmine_nikoca_re.git
+$ cd /path/to/redmine
+$ rake redmine:plugins:migrate NAME=redmine_nikoca_re
+(restart redmine)
+```
 
 == Uninstallation
-1. cd /path/to/redmine
-2. rake redmine:plugins:migrate NAME=redmine_nikoca_re VERSION=0
-3. cd /path/to/redmine/plugins
-4. restart redmine
+```bash
+$ cd /path/to/redmine
+$ rake redmine:plugins:migrate NAME=redmine_nikoca_re VERSION=0
+(restart redmine)
+```
+== Material sources
+<http://www.emstudio.jp/>
+<http://sozai.akuseru-design.com/>
 
 == License
-
+All the files in this distribution are covered under the MIT license.
+see the file MITL.
