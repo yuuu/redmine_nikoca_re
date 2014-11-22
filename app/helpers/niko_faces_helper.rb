@@ -1,15 +1,14 @@
 module NikoFacesHelper
   def link_comment_face_tag(project, face)
     if face != nil
-      img_src = content_tag(:span) do
-        link_to(feeling_tag(face.feeling), project_niko_face_path(@project, face.id))
-      end
-
-
       if face.has_unread_resnponses?(User.current)
-        notify = tag(:br) + image_tag('new.gif', {:plugin => 'redmine_nikoca_re', :alt => 'new'})
+        notify = concat(image_tag('new.gif', {:plugin => 'redmine_nikoca_re', :alt => 'new'}) + tag(:br))
       else
         notify = ""
+      end
+
+      img_src = content_tag(:span) do
+        link_to(feeling_tag(face.feeling), project_niko_face_path(@project, face.id))
       end
 
       comment_src = content_tag(:div, :class => 'arrow_box') do
@@ -23,7 +22,7 @@ module NikoFacesHelper
         end
       end
 
-      return concat(img_src + notify + comment_src)
+      return concat(img_src + comment_src)
     else
       return concat(feeling_tag(nil))
     end
