@@ -3,47 +3,48 @@
   <%= stylesheet_link_tag "index.css", :plugin => "redmine_nikoca_re" %>
 <% end %>
 
-<table class="username">
+<table class="nikocale">
   <thead>
     <tr>
-      <th>ユーザ名</th>
+      <th class="username">ユーザ名</th>
+      <th>
+        <table class="calender">
+        <tr>
+        <% @days.each do |date| %>
+          <% date_tag(date, @days[0] == date) %>
+        <% end %>
+        </tr>
+        </table>
+      </th>
     </tr>
   </thead>
   <tbody>
     <% @users.each do |user| %>
       <tr class="<%= cycle('odd', 'even') %>">
         <td class="yyy"><%= link_to_user(user) %></td>
+        <td class="yyy">
+          <table class="calender">
+          <tr>
+          <% @days.each do |date| %>
+            <td><% link_comment_face_tag(@project, @niko_faces[user.name][date.day]) %></td>
+          <% end %>
+          </tr>
+          </table>
+        </td>
       </tr>
     <% end %>
-    <tr class="<%= cycle('odd', 'even') %>">
-      <td class="yyy team_row"><%= l(:team_feeling) %></td>
+    <tr class="team_row">
+      <td><%= l(:team_feeling) %></td>
+      <td>
+        <table class="calender">
+        <tr>
+        <% @days.each do |date| %>
+          <td><% concat(feeling_tag(@team_feelings[date.day])) %></td>
+        <% end %>
+        </tr>
+        </table>
+      </td>
     </tr>
-</table>
-
-<table class="calender">
-  <thead>
-    <tr>
-      <% @days.each do |date| %>
-        <% date_tag(date, @days[0] == date) %>
-      <% end %>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @users.each do |user| %>
-      <tr class="<%= cycle('odd', 'even') %>">
-      <% @days.each do |date| %>
-        <td class="yyy"><% link_comment_face_tag(@project, @niko_faces[user.name][date.day]) %></td>
-      <% end %>
-      </tr>
-    <% end %>
-
-    <tr class="<%= cycle('odd', 'even') %>">
-    <% @days.each do |date| %>
-      <td class="yyy team_row"><% concat(feeling_tag(@team_feelings[date.day])) %></td>
-    <% end %>
-    </tr>
-  </tbody>
 </table>
 
 
