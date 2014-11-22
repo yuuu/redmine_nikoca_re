@@ -14,13 +14,14 @@ $ rake redmine:plugins:migrate NAME=redmine_nikoca_re
 ```
 
 == Uninstallation
-```bash
+```
 $ cd /path/to/redmine
 $ rake redmine:plugins:migrate NAME=redmine_nikoca_re VERSION=0
 (restart redmine)
 ```
 == Material sources
 <http://www.emstudio.jp/>
+
 <http://sozai.akuseru-design.com/>
 
 == License
