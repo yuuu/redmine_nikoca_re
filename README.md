@@ -1,4 +1,4 @@
-# redmine_nikoca_re
+# Redmine Nikoca Re Plugin
 
 Niko-niko Calender plugin for Redmine.
 

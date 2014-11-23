@@ -3,7 +3,7 @@ Redmine::Plugin.register :redmine_nikoca_re do
   author 'Yuuu'
   description 'This is a plugin to check every day the mood condition of project members.'
   version '0.0.1'
-  url 'https://github.com/yuuu/redmine-nikoca-re/'
+  url 'https://github.com/yuuu/redmine_nikoca_re'
   author_url 'http://ylgbk.hatenablog.com/'
 
   project_module :redmine_nikoca_re do
