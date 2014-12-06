@@ -1,17 +1,3 @@
-class Array
-  def numeric_average
-    average = nil
-    if !empty?
-      average = 0.0
-      self.each do |value|
-        average += value
-      end
-      average /= self.size
-      average.truncate
-    end
-  end
-end
-
 class Date
   def self.days(start, count)
     days_array = Array.new
@@ -30,25 +16,30 @@ class NikoFacesController < ApplicationController
   before_filter :find_project, :authorize 
   before_filter :find_niko_face, :except => [:index, :new, :create, :preview, :backnumber]
 
-  DISP_WEEK_NUM = 2
   DAY_OF_WEEK = 7
+  DISP_WEEK_NUM = 2
+  DISP_DAY_NUM = DISP_WEEK_NUM * DAY_OF_WEEK
 
   def backnumber
     # 表示開始日を計算する
-    set_printing_dates(params[:id].to_i)
+    @backnumber = params[:id].to_i
+    @dates = get_dates(@backnumber)
 
     # カレンダーを構築する
-    set_member_feelings
-    set_team_feelings
+    @niko_faces = NikoFace.project_member_faces(@project, @dates)
+    @users = get_users(@project)
+    @team_feelings = NikoFace.team_feelings(@project, @dates)
   end
 
   def index
     # 表示開始日を計算する
-    set_printing_dates(0)
+    @backnumber = 0
+    @dates = get_dates(@backnumber)
 
     # カレンダーを構築する
-    set_member_feelings
-    set_team_feelings
+    @niko_faces = NikoFace.project_member_faces(@project, @dates)
+    @users = get_users(@project)
+    @team_feelings = NikoFace.team_feelings(@project, @dates)
   end
 
   def new
@@ -119,39 +110,18 @@ private
     render_404    unless @niko_face
   end
 
-  def set_printing_dates(backnumber)
-    @backnumber = backnumber
-    date = Date.today - ((DAY_OF_WEEK * DISP_WEEK_NUM) * (@backnumber + 1) ) + 1
-
-    # 表示する期間の日付を@datesへ格納
-    @dates = Date.days(date, DISP_WEEK_NUM * DAY_OF_WEEK)
+  def get_dates(backnumber)
+    date = Date.today - (DISP_DAY_NUM * (backnumber + 1)) + 1
+    dates = Date.days(date, DISP_DAY_NUM)
+    return dates
   end
 
-  def set_team_feelings
-    @team_feelings = Hash.new
-
-    # チームの気分を判定する
-    @dates.each do |date|
-      feelings = Array.new
-      @users.each do|user|
-        if @niko_faces[user.name][date.day] 
-          feelings << @niko_faces[user.name][date.day].feeling
-        end
-      end
-      @team_feelings[date.day] = feelings.numeric_average
+  def get_users(project)
+    users = Array.new
+    project.members.each do |member|
+      users << member.user
     end
-  end
-
-  def set_member_feelings
-    @niko_faces = Hash.new
-    @users = Array.new
-
-    # プロジェクトメンバーごとに気分を取得・格納
-    @project.members.each do |member|
-      # メンバーの気分を格納
-      @niko_faces[member.user.name] = NikoFace.member_faces(member.user, @dates)
-      @users << member.user
-    end
+    return users
   end
 end
 
