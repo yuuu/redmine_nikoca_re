@@ -115,8 +115,8 @@ private
 
       # 各日数分気分を取得
       user_faces = NikoFace.where(:author_id => user.id)
-      @days.each do |day|
-        faces[day.day] = user_faces.where(:date => day)[0];
+      @days.each do |date|
+        faces[date.day] = user_faces.where(:date => date)[0];
       end
 
       # メンバーの気分を格納
@@ -124,20 +124,20 @@ private
     end
 
     # チームの気分を判定する
-    @days.each do |day|
+    @days.each do |date|
       faces = Array.new
       @users.each do|user|
-        faces << @niko_faces[user.name][day]
+        faces << @niko_faces[user.name][date.day]
       end
       faces.compact!
       if faces.size != 0
         faces.each do |face|
-          @team_feelings[day.day] += face.feeling
+          @team_feelings[date.day] += face.feeling
         end
-        @team_feelings[day.day] /= faces.size
-        @team_feelings[day.day] = @team_feelings[day.day].truncate.to_i
+        @team_feelings[date.day] /= faces.size
+        @team_feelings[date.day] = @team_feelings[date.day].truncate.to_i
       else
-        @team_feelings[day.day] = nil
+        @team_feelings[date.day] = nil
       end
     end
   end
