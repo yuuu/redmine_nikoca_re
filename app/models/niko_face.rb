@@ -25,4 +25,12 @@ class NikoFace < ActiveRecord::Base
     end
     unread
   end
+
+  def self.member_faces(user, dates)
+    faces = Hash.new(dates.size)
+    dates.each do |date|
+      faces[date.day] = NikoFace.where(:author_id => user.id).where(:date => date)[0]
+    end
+    return faces
+  end
 end

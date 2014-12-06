@@ -10,8 +10,8 @@
       <th>
         <table class="calender">
         <tr>
-        <% @days.each do |date| %>
-          <% date_tag(date, @days[0] == date) %>
+        <% @dates.each do |date| %>
+          <% date_tag(date, @dates[0] == date) %>
         <% end %>
         </tr>
         </table>
@@ -25,7 +25,7 @@
         <td class="yyy">
           <table class="calender">
           <tr>
-          <% @days.each do |date| %>
+          <% @dates.each do |date| %>
             <td><% link_comment_face_tag(@project, @niko_faces[user.name][date.day]) %></td>
           <% end %>
           </tr>
@@ -38,7 +38,7 @@
       <td>
         <table class="calender">
         <tr>
-        <% @days.each do |date| %>
+        <% @dates.each do |date| %>
           <td><% concat(feeling_tag(@team_feelings[date.day])) %></td>
         <% end %>
         </tr>
