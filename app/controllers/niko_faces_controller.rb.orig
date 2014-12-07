@@ -1,7 +1,10 @@
+<<<<<<< HEAD
+=======
 # Redmine_Nikoca_Re プラグイン NikoFacesController
 # @author yuuu(Yuhei Okazaki)
 
 # @abstract Dateクラスにdaysメソッドを拡張
+>>>>>>> refctoring
 class Date
   def self.days(start, count)
     days_array = Array.new
@@ -14,8 +17,11 @@ class Date
   end
 end
 
+<<<<<<< HEAD
+=======
 # ニコカレの作成・編集・表示などのアクション処理を実装
 # @abstract NikoFaceのアクションに応じた処理を定義
+>>>>>>> refctoring
 class NikoFacesController < ApplicationController
   unloadable
   menu_item :redmine_nikoca_re
@@ -32,9 +38,25 @@ class NikoFacesController < ApplicationController
     @team_feelings = NikoFace.team_feelings(@project, @dates)
   end
 
+<<<<<<< HEAD
+=======
   # 1周間の日数
+>>>>>>> refctoring
   DAY_OF_WEEK = 7
+  DISP_WEEK_NUM = 2
+  DISP_DAY_NUM = DISP_WEEK_NUM * DAY_OF_WEEK
 
+<<<<<<< HEAD
+  def backnumber
+    # 表示開始日を計算する
+    @backnumber = params[:id].to_i
+    @dates = get_dates(@backnumber)
+
+    # カレンダーを構築する
+    @niko_faces = NikoFace.project_member_faces(@project, @dates)
+    @users = get_users(@project)
+    @team_feelings = NikoFace.team_feelings(@project, @dates)
+=======
   # カレンダに表示する期間(単位：週)
   DISP_WEEK_NUM = 2
 
@@ -43,10 +65,22 @@ class NikoFacesController < ApplicationController
 
   # ニコカレのカレンダー(バックナンバー)を表示する
   def backnumber
+>>>>>>> refctoring
   end
 
   # ニコカレのカレンダーを表示する
   def index
+<<<<<<< HEAD
+    # 表示開始日を計算する
+    @backnumber = 0
+    @dates = get_dates(@backnumber)
+
+    # カレンダーを構築する
+    @niko_faces = NikoFace.project_member_faces(@project, @dates)
+    @users = get_users(@project)
+    @team_feelings = NikoFace.team_feelings(@project, @dates)
+=======
+>>>>>>> refctoring
   end
 
   # ニコカレの作成画面を表示する
@@ -125,19 +159,25 @@ private
     render_404    unless @niko_face
   end
 
+<<<<<<< HEAD
+=======
   # カレンダーに表示する日付リストを取得
   # @param backnumber [Fixnum] バックナンバー.
   # 0が最新で数値が大きくなるほど過去を示す.
   # @return [Array] 日付リスト
+>>>>>>> refctoring
   def get_dates(backnumber)
     date = Date.today - (DISP_DAY_NUM * (backnumber + 1)) + 1
     dates = Date.days(date, DISP_DAY_NUM)
     return dates
   end
 
+<<<<<<< HEAD
+=======
   # プロジェクトに属するユーザリストを取得
   # @param project [Project] カレントプロジェクト
   # @return [Array] ユーザリスト
+>>>>>>> refctoring
   def get_users(project)
     users = Array.new
     project.members.each do |member|

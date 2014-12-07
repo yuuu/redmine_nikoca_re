@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+class Array
+=======
 # Redmine_Nikoca_Re プラグイン NikoFace
 # @author yuuu(Yuhei Okazaki)
 
@@ -5,6 +8,7 @@
 class Array
   # 平均値を整数値で取得する
   # @return 配列値の平均値(整数)
+>>>>>>> refctoring
   def numeric_average
     average = nil
     if !empty?
@@ -18,10 +22,13 @@ class Array
   end
 end
 
+<<<<<<< HEAD
+=======
 # ニコカレへ記入する気分を保持する
 # 併せて、記入者、記入日、コメント、レスポンスの登録・操作も
 # 定義する
 # @abstract ニコカレへ記入する気分を保持する
+>>>>>>> refctoring
 class NikoFace < ActiveRecord::Base
   unloadable
 
@@ -55,11 +62,14 @@ class NikoFace < ActiveRecord::Base
     unread
   end
 
+<<<<<<< HEAD
+=======
   # プロジェクトメンバの気分を取得
   # @param project [Project] 取得対象となるプロジェクト
   # @param dates [Array] 取得対象となる日付リスト
   # @return [Hash] プロジェクトメンバの気分
   # project_member_faces[user.id][date.day]
+>>>>>>> refctoring
   def self.project_member_faces(project, dates)
     project_member_faces = Hash.new
     project.members.each do |member|
@@ -68,11 +78,14 @@ class NikoFace < ActiveRecord::Base
     return project_member_faces
   end
 
+<<<<<<< HEAD
+=======
   # メンバの気分を取得
   # @param user [User] 取得対象となるユーザ
   # @param dates [Array] 取得対象となる日付リスト
   # @return [Hash] メンバの気分
   # member_faces[date.day]
+>>>>>>> refctoring
   def self.member_faces(user, dates)
     member_faces = Hash.new(dates.size)
     dates.each do |date|
@@ -81,11 +94,14 @@ class NikoFace < ActiveRecord::Base
     return member_faces
   end
 
+<<<<<<< HEAD
+=======
   # チームの気分リストを取得
   # @param project [Project] 取得対象となるプロジェクト
   # @param dates [Array] 取得対象となる日付リスト
   # @return [Hash] チームの気分リスト
   # team_feelings[date.day]
+>>>>>>> refctoring
   def self.team_feelings(project, dates)
     team_feelings = Hash.new(dates.size)
     dates.each do |date|
@@ -94,10 +110,13 @@ class NikoFace < ActiveRecord::Base
     return team_feelings
   end
 
+<<<<<<< HEAD
+=======
   # チームの気分を取得
   # @param project [Project] 取得対象となるプロジェクト
   # @param date [Date] 取得対象となる日付
   # @return [Integer] チームの気分
+>>>>>>> refctoring
   def self.team_feeling(project, date)
     feelings = Array.new
     project.members.each do|member|
