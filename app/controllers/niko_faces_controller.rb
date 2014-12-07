@@ -1,27 +1,45 @@
+class Date
+  def self.days(start, count)
+    days_array = Array.new
+    date = start
+    count.times do
+      days_array << date
+      date = date + 1
+    end
+    return days_array
+  end
+end
+
 class NikoFacesController < ApplicationController
   unloadable
   menu_item :redmine_nikoca_re
   before_filter :find_project, :authorize 
   before_filter :find_niko_face, :except => [:index, :new, :create, :preview, :backnumber]
 
-  DISP_WEEK_NUM = 2
   DAY_OF_WEEK = 7
+  DISP_WEEK_NUM = 2
+  DISP_DAY_NUM = DISP_WEEK_NUM * DAY_OF_WEEK
 
   def backnumber
     # 表示開始日を計算する
     @backnumber = params[:id].to_i
-    date = Date.today - ((DAY_OF_WEEK * DISP_WEEK_NUM) * (@backnumber + 1) ) + 1
+    @dates = get_dates(@backnumber)
 
     # カレンダーを構築する
-    create_calender(date)
+    @niko_faces = NikoFace.project_member_faces(@project, @dates)
+    @users = get_users(@project)
+    @team_feelings = NikoFace.team_feelings(@project, @dates)
   end
 
   def index
     # 表示開始日を計算する
-    date = Date.today - (DAY_OF_WEEK * DISP_WEEK_NUM) + 1
+    @backnumber = 0
+    @dates = get_dates(@backnumber)
 
     # カレンダーを構築する
-    create_calender(date)
+    @niko_faces = NikoFace.project_member_faces(@project, @dates)
+    @users = get_users(@project)
+    @team_feelings = NikoFace.team_feelings(@project, @dates)
   end
 
   def new
@@ -92,54 +110,18 @@ private
     render_404    unless @niko_face
   end
 
-  def create_calender(start_date)
-    @users = Array.new
-    @days = Array.new
-    @niko_faces = Hash.new
-    @team_feelings = Hash.new
+  def get_dates(backnumber)
+    date = Date.today - (DISP_DAY_NUM * (backnumber + 1)) + 1
+    dates = Date.days(date, DISP_DAY_NUM)
+    return dates
+  end
 
-    # 表示する期間の日付を@daysへ格納
-    (DISP_WEEK_NUM * DAY_OF_WEEK).times do
-      @days << start_date
-      @team_feelings[start_date.day] = 0.0
-      start_date = start_date + 1
+  def get_users(project)
+    users = Array.new
+    project.members.each do |member|
+      users << member.user
     end
-
-    # プロジェクトメンバーごとに気分を取得・格納
-    Member.where(project_id: @project.id).each do |member|
-      faces = Hash.new
-
-      # ユーザ情報を取得
-      user = User.find(member.user_id)
-      @users << user
-
-      # 各日数分気分を取得
-      user_faces = NikoFace.where(:author_id => user.id)
-      @days.each do |date|
-        faces[date.day] = user_faces.where(:date => date)[0];
-      end
-
-      # メンバーの気分を格納
-      @niko_faces[user.name] = faces
-    end
-
-    # チームの気分を判定する
-    @days.each do |date|
-      faces = Array.new
-      @users.each do|user|
-        faces << @niko_faces[user.name][date.day]
-      end
-      faces.compact!
-      if faces.size != 0
-        faces.each do |face|
-          @team_feelings[date.day] += face.feeling
-        end
-        @team_feelings[date.day] /= faces.size
-        @team_feelings[date.day] = @team_feelings[date.day].truncate.to_i
-      else
-        @team_feelings[date.day] = nil
-      end
-    end
+    return users
   end
 end
 

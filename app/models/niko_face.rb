@@ -1,3 +1,17 @@
+class Array
+  def numeric_average
+    average = nil
+    if !empty?
+      average = 0.0
+      self.each do |value|
+        average += value
+      end
+      average /= self.size
+      average.truncate
+    end
+  end
+end
+
 class NikoFace < ActiveRecord::Base
   unloadable
 
@@ -24,5 +38,38 @@ class NikoFace < ActiveRecord::Base
       end
     end
     unread
+  end
+
+  def self.project_member_faces(project, dates)
+    project_member_faces = Hash.new
+    project.members.each do |member|
+      project_member_faces[member.user.name] = NikoFace.member_faces(member.user, dates)
+    end
+    return project_member_faces
+  end
+
+  def self.member_faces(user, dates)
+    member_faces = Hash.new(dates.size)
+    dates.each do |date|
+      member_faces[date.day] = NikoFace.where(:author_id => user.id).where(:date => date)[0]
+    end
+    return member_faces
+  end
+
+  def self.team_feelings(project, dates)
+    team_feelings = Hash.new(dates.size)
+    dates.each do |date|
+      team_feelings[date.day] = NikoFace.team_feeling(project, date)
+    end
+    return team_feelings
+  end
+
+  def self.team_feeling(project, date)
+    feelings = Array.new
+    project.members.each do|member|
+      face = NikoFace.where(:author_id => member.user_id).where(:date => date)[0]
+      feelings << face.feeling if face
+    end
+    return feelings.numeric_average
   end
 end
