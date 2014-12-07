@@ -1,3 +1,5 @@
+# Redmine_Nikoca_Re プラグイン NikoResponse
+# @author yuuu(Yuhei Okazaki)
 class NikoResponse < ActiveRecord::Base
   unloadable
 
@@ -7,6 +9,7 @@ class NikoResponse < ActiveRecord::Base
   belongs_to :author, :class_name => 'User', :foreign_key => 'author_id'
   belongs_to :response_to, :class_name => 'NikoFace', :foreign_key => 'niko_face_id'
 
+  # 既読とする
   def read
     unread = self.unread
     self.unread = false
@@ -22,6 +25,8 @@ class NikoResponse < ActiveRecord::Base
     end
   end
 
+  # 未読か？
+  # @return 未読であればtrue
   def is_unread?
     self.unread
   end

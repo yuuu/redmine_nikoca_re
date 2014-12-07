@@ -1,0 +1,6 @@
+app/models/niko_face.rb efc7970bb0522e1a081340fd77adf8a1760a06b2
+app/models/niko_response.rb 15c7c15a70d7e9cc15acfdc388fd235563ffd48e
+app/helpers/niko_faces_helper.rb dccdbcdeca1ab6ec2ae26fffa770ceda3c619b48
+app/helpers/niko_responses_helper.rb d34705578966c267c641ae5d7397862dd4036d7f
+app/controllers/niko_faces_controller.rb aa10ed225a27b078bbc586a7cc397d8cf0989924
+app/controllers/niko_responses_controller.rb 9d0eb563dad6ede7b318b24934dc42f4fcb77585

@@ -1,3 +1,7 @@
+# Redmine_Nikoca_Re プラグイン NikoFacesController
+# @author yuuu(Yuhei Okazaki)
+
+# @abstract Dateクラスにdaysメソッドを拡張
 class Date
   def self.days(start, count)
     days_array = Array.new
@@ -10,38 +14,42 @@ class Date
   end
 end
 
+# ニコカレの作成・編集・表示などのアクション処理を実装
+# @abstract NikoFaceのアクションに応じた処理を定義
 class NikoFacesController < ApplicationController
   unloadable
   menu_item :redmine_nikoca_re
   before_filter :find_project, :authorize 
-  before_filter :find_niko_face, :except => [:index, :new, :create, :preview, :backnumber]
+  before_filter :find_niko_face, :except => [:backnumber, :index, :new, :create]
 
+  # カレンダ構築に必要な情報をセット
+  before_filter :only => [:backnumber, :index] do
+    @backnumber = 0
+    @backnumber = params[:id].to_i if params[:id].to_i
+    @dates = get_dates(@backnumber)
+    @users = get_users(@project)
+    @niko_faces = NikoFace.project_member_faces(@project, @dates)
+    @team_feelings = NikoFace.team_feelings(@project, @dates)
+  end
+
+  # 1周間の日数
   DAY_OF_WEEK = 7
+
+  # カレンダに表示する期間(単位：週)
   DISP_WEEK_NUM = 2
+
+  # カレンダに表示する日数
   DISP_DAY_NUM = DISP_WEEK_NUM * DAY_OF_WEEK
 
+  # ニコカレのカレンダー(バックナンバー)を表示する
   def backnumber
-    # 表示開始日を計算する
-    @backnumber = params[:id].to_i
-    @dates = get_dates(@backnumber)
-
-    # カレンダーを構築する
-    @niko_faces = NikoFace.project_member_faces(@project, @dates)
-    @users = get_users(@project)
-    @team_feelings = NikoFace.team_feelings(@project, @dates)
   end
 
+  # ニコカレのカレンダーを表示する
   def index
-    # 表示開始日を計算する
-    @backnumber = 0
-    @dates = get_dates(@backnumber)
-
-    # カレンダーを構築する
-    @niko_faces = NikoFace.project_member_faces(@project, @dates)
-    @users = get_users(@project)
-    @team_feelings = NikoFace.team_feelings(@project, @dates)
   end
 
+  # ニコカレの作成画面を表示する
   def new
     niko_faces = NikoFace.where(:author_id => User.current.id).where(:date => Date.today);
 
@@ -53,6 +61,7 @@ class NikoFacesController < ApplicationController
     end
   end
 
+  # ニコカレを作成する
   def create
     @niko_face = NikoFace.new(params[:niko_face])
     @niko_face.date = Date.today
@@ -68,6 +77,7 @@ class NikoFacesController < ApplicationController
     end
   end
 
+  # ニコカレの詳細画面を表示する
   def show
     # レスをすべて既読とする
     @niko_face.read_responses(User.current)
@@ -76,14 +86,17 @@ class NikoFacesController < ApplicationController
     @niko_response = NikoResponse.new
   end
 
+  # ニコカレの編集画面を表示する
   def edit
   end
 
+  # ニコカレを削除する
   def destroy
     @niko_face.destroy
     redirect_to project_niko_faces_path(@project)
   end
 
+  # ニコカレを更新する
   def update 
     @niko_face.attributes = params[:niko_face]
     if @niko_face.valid?
@@ -99,23 +112,32 @@ class NikoFacesController < ApplicationController
   end
 
 private
+  # 現在のプロジェクトを@projectへセットする
   def find_project
     @project = Project.find(params[:project_id])
   rescue ActiveRecord::RecordNotFound
     render_404
   end
 
+  # 現在のニコカレを@niko_faceへセットする
   def find_niko_face
     @niko_face = NikoFace.find_by_id(params[:id])
     render_404    unless @niko_face
   end
 
+  # カレンダーに表示する日付リストを取得
+  # @param backnumber [Fixnum] バックナンバー.
+  # 0が最新で数値が大きくなるほど過去を示す.
+  # @return [Array] 日付リスト
   def get_dates(backnumber)
     date = Date.today - (DISP_DAY_NUM * (backnumber + 1)) + 1
     dates = Date.days(date, DISP_DAY_NUM)
     return dates
   end
 
+  # プロジェクトに属するユーザリストを取得
+  # @param project [Project] カレントプロジェクト
+  # @return [Array] ユーザリスト
   def get_users(project)
     users = Array.new
     project.members.each do |member|
