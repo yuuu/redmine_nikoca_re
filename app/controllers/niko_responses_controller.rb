@@ -21,7 +21,7 @@ class NikoResponsesController < ApplicationController
     @niko_response.unread = true
     if @niko_response.valid?
       @niko_face.responses << @niko_response
-      NikoMailer.deliver_add_response(@niko_face, @niko_response)
+      NikoMailer.deliver_add_response(@project, @niko_face, @niko_response)
       redirect_to project_niko_face_path(@project, @niko_face.id)
     else
       render 'niko_faces/show'
