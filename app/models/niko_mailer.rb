@@ -14,8 +14,7 @@ class NikoMailer < Mailer
     @project = project
     @niko_face = face
     @niko_res = res
-    mail(:to => face.author.mail, :cc => res.author.mail,
-      :subject => "[Redmine_Nikoca_Re]add response to #{face.created_at.strftime("%Y-%m-%d")} feeling.")
+    mail(:to => face.author.mail, :subject => "[Redmine_Nikoca_Re]add response to #{face.created_at.strftime("%Y-%m-%d")} feeling.")
   end
 
   def self.method_missing(method, *args, &block)
