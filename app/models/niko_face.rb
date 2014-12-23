@@ -13,7 +13,7 @@ class Array
         average += value
       end
       average /= self.size
-      average.truncate
+      average.round
     end
   end
 end
