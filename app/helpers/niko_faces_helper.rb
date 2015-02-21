@@ -11,21 +11,12 @@ module NikoFacesHelper
       end
 
       img_src = content_tag(:span) do
-        link_to(feeling_tag(face.feeling), project_niko_face_path(@project, face.id))
+        comment_mes = (face.comment != '' ? face.comment : l(:no_comment))
+        comment_num = content_tag(:span, "#{l(:field_comment)}: #{face.responses.size}#{l(:comment_unit)}", class: "responseinfo")
+        link_to(feeling_tag(face.feeling, comment_mes + "<br />" + comment_num), project_niko_face_path(@project, face.id))
       end
 
-      comment_src = content_tag(:div, :class => 'arrow_box') do
-        concat(face.comment != '' ? face.comment : l(:no_comment))
-        if !face.responses.empty?
-          concat(tag(:br))
-          resnum_src = content_tag(:span, :class => "responseinfo") do
-            concat("#{l(:field_comment)}: #{face.responses.size}#{l(:comment_unit)}")
-          end
-          concat(resnum_src)
-        end
-      end
-
-      return concat(img_src + comment_src)
+      return concat(img_src)
     else
       return concat(feeling_tag(nil))
     end
@@ -33,13 +24,18 @@ module NikoFacesHelper
 
   # 顔アイコンを出力する
   # @param face [NikoFace] 気分
-  def feeling_tag(feeling)
+  def feeling_tag(feeling, alttext = nil)
     options = {:plugin => 'redmine_nikoca_re', :width => '32', :height => '32'}
 
     if feeling != nil
       icon = ({1 => 'good.png', 2 => 'normal.png', 3 => 'bad.png'}[feeling])
       label = ({1 => :good, 2 => :normal, 3 => :bad}[feeling])
-      options[:alt] = l(label)
+      if alttext != nil
+        options[:alt] = alttext
+        options[:class] = "balloon"
+      else
+        options[:alt] = l(label)
+      end
       image_tag(icon, options)
     else
       options[:alt] = l(:none)
