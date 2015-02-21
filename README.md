@@ -1,5 +1,7 @@
 # Redmine Nikoca Re Plugin
 
+![screenshot](https://raw.githubusercontent.com/yuuu/redmine_nikoca_re/master/assets/images/screenshot.png)
+
 Niko-niko Calender plugin for Redmine.
 
 redmine_nikoca_re is plugin to check the mood for project members.
