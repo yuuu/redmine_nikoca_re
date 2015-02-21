@@ -1,6 +1,27 @@
+
+<% content_for :header_tags do %>
+  <%= stylesheet_link_tag "index.css", :plugin => "redmine_nikoca_re" %>
+<% end %>
+
 <%= error_messages_for 'niko_face' %>
 <div class="box">
-  <div><%= form.select(:feeling, {l(:good) => 1, l(:normal) => 2, l(:bad) => 3}, {:include_blank => l(:item_select)}) %></div>
+  <h3><%= l(:field_feeling)%></h3>
+  <% feelings = [:good, :normal, :bad] %>
+  <div><table class="feeling">
+    <tr><% feelings.each do |feeling| %>
+      <th><%= l(feeling) %></th>
+    <% end %></tr>
+    <tr><% feelings.each do |feeling| %>
+    <% options = {:plugin => 'redmine_nikoca_re', :width => '32', :height => '32'} %>
+      <% options[:alt] = l(feeling) %>
+      <td><%= image_tag(feeling.to_s + '.png', options) %></td>
+    <% end %></tr>
+    <tr><% feelings.each_with_index do |feeling, index| %>
+      <td><%= form.radio_button(:feeling, (index + 1).to_s) %></td>
+    <% end %></tr>
+  </table></div>
+  <br />
+  <h3><%= l(:field_comment)%></h3>
   <div><%= form.text_area :comment, {:cols => 80, :rows => 5} %></div>
 </div>
 

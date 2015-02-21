@@ -72,6 +72,11 @@ table.calender td{
 span:hover + .arrow_box{
   display: block;
 }
+table.feeling{
+  width: 40%;
+  text-align: center;
+}
+
 span.responseinfo{
   font-size: 80%;
   color: #808080;
