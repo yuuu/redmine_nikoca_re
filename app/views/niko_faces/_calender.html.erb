@@ -1,6 +1,22 @@
 
 <% content_for :header_tags do %>
   <%= stylesheet_link_tag "index.css", :plugin => "redmine_nikoca_re" %>
+  <%= javascript_include_tag "jquery.balloon.js",:plugin => 'redmine_nikoca_re' %>
+  <script type="text/javascript">
+  $(function () {
+    $("img.balloon").balloon( {
+      tipSize: 10,
+      css: {
+        width: "100px",
+        height: "auto",
+        wordBreak: "break-all",
+        boxShadow: "none",
+         color: "#444",
+        backgroundColor: '#F8F8A0',
+      }
+    });
+  });
+  </script>
 <% end %>
 
 <table class="nikocale">
