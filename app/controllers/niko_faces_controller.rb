@@ -19,7 +19,7 @@ end
 class NikoFacesController < ApplicationController
   unloadable
   menu_item :redmine_nikoca_re
-  before_filter :find_project, :authorize 
+  before_filter :find_project, :authorize
   before_filter :find_niko_face, :except => [:backnumber, :index, :new, :create]
 
   # カレンダ構築に必要な情報をセット
@@ -68,7 +68,7 @@ class NikoFacesController < ApplicationController
     @niko_face.author = User.current
 
     if @niko_face.valid?
-      if @niko_face.save    
+      if @niko_face.save
         flash[:notice] = l(:notice_successful_create)
         redirect_to project_niko_faces_path(@project)
       end
@@ -97,7 +97,7 @@ class NikoFacesController < ApplicationController
   end
 
   # ニコカレを更新する
-  def update 
+  def update
     @niko_face.attributes = params[:niko_face]
     if @niko_face.valid?
       if @niko_face.save
@@ -121,7 +121,7 @@ private
 
   # 現在のニコカレを@niko_faceへセットする
   def find_niko_face
-    @niko_face = NikoFace.find_by_id(params[:id])
+    @niko_face = NikoFace.find_by_id(params["id"])
     render_404    unless @niko_face
   end
 
@@ -146,4 +146,3 @@ private
     return users
   end
 end
-
