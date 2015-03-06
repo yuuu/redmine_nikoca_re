@@ -21,6 +21,13 @@ $ cd /path/to/redmine
 $ rake redmine:plugins:migrate NAME=redmine_nikoca_re VERSION=0 RAILS_ENV=production 
 (restart redmine)
 ```
+
+## Support
+
+- Redmine 3.0.0
+- Redmine 2.5.2
+
+
 ## Material sources
 <http://www.emstudio.jp/>
 
