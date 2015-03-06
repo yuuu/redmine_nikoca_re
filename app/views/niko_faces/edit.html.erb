@@ -1,6 +1,6 @@
 <h2><%= l(:caption_today_feeling) %></h2>
 
-<%= form_for @niko_face, :url => project_niko_face_path(@project), :html => {:id => 'edit'} do |f| %>
+<%= form_for @niko_face, :url => project_niko_face_path(@project, @niko_face), :html => {:id => 'edit'} do |f| %>
   <%= render :partial => 'niko_faces/form', :locals => {:form => f} %>
   <%= f.submit l(:button_edit) %>
 <% end %>
