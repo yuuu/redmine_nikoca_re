@@ -11,7 +11,7 @@ module NikoFacesHelper
       end
 
       img_src = content_tag(:span) do
-        comment_mes = (face.comment != '' ? face.comment : l(:no_comment))
+        comment_mes = (face.comment != '' ? strip_tags(face.comment) : l(:no_comment))
         comment_num = content_tag(:span, "#{l(:field_comment)}: #{face.responses.size}#{l(:comment_unit)}", class: "responseinfo")
         link_to(feeling_tag(face.feeling, comment_mes + "<br />" + comment_num), project_niko_face_path(@project, face.id))
       end
