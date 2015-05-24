@@ -47,6 +47,7 @@ class NikoFacesController < ApplicationController
 
   # ニコカレのカレンダーを表示する
   def index
+		@mode = params[:today] || "calendar"
   end
 
   # ニコカレの作成画面を表示する

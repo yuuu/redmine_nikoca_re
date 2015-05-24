@@ -38,6 +38,9 @@ table.calender td{
   text-align: center;
   vertical-align: middle;
 }
+.comment{
+	width: 90%;
+}
 .saturday{
   color: #0000FF;
 }

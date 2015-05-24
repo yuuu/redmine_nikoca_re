@@ -1,0 +1,52 @@
+
+<% content_for :header_tags do %>
+  <%= stylesheet_link_tag "index.css", :plugin => "redmine_nikoca_re" %>
+<% end %>
+
+<table class="nikocale">
+  <thead>
+    <tr>
+      <th class="username"><%= l(:field_user) %></th>
+      <th>
+        <table class="calender">
+        <tr>
+				<% date = @dates[@dates.size - 1] %>
+				<% date_tag(date, true) %>
+				<th class="comment"><%= l(:label_comment_plural) %></th>
+        </tr>
+        </table>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr class="<%= cycle('odd', 'even') %>">
+        <td class="yyy"><%= link_to_user(user) %></td>
+        <td class="yyy">
+          <table class="calender">
+          <tr>
+					<td><% concat(feeling_tag(@niko_faces[user.name][date.day].feeling)) %></td>
+					<% face = @niko_faces[user.name][date.day] %>
+					<td class="comment">
+						<%= face.comment != '' ? face.comment : l(:no_comment) %>
+						<%= content_tag(:span, "#{l(:field_comment)}: #{face.responses.size}#{l(:comment_unit)}", class: "responseinfo") %>
+					</td>
+          </tr>
+          </table>
+        </td>
+      </tr>
+    <% end %>
+    <tr class="team_row">
+      <td><%= l(:team_feeling) %></td>
+      <td>
+        <table class="calender">
+        <tr>
+				<td><% concat(feeling_tag(@team_feelings[@dates[@dates.size - 1].day])) %></td>
+				<td class="comment"></td>
+        </tr>
+        </table>
+      </td>
+    </tr>
+</table>
+
+
