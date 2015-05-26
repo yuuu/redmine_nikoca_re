@@ -10,9 +10,8 @@
       <th>
         <table class="calender">
         <tr>
-				<% date = @dates[@dates.size - 1] %>
-				<% date_tag(date, true) %>
-				<th class="comment"><%= l(:label_comment_plural) %></th>
+				<% date_tag(Date.today, true) %>
+				<th class="today_comment"><%= l(:label_comment_plural) %></th>
         </tr>
         </table>
       </th>
@@ -25,12 +24,16 @@
         <td class="yyy">
           <table class="calender">
           <tr>
-					<td><% concat(feeling_tag(@niko_faces[user.name][date.day].feeling)) %></td>
-					<% face = @niko_faces[user.name][date.day] %>
-					<td class="comment">
-						<%= face.comment != '' ? face.comment : l(:no_comment) %>
-						<%= content_tag(:span, "#{l(:field_comment)}: #{face.responses.size}#{l(:comment_unit)}", class: "responseinfo") %>
-					</td>
+						<% face = @niko_faces[user.name][Date.today.day] %>
+						<td class="today_face">
+							<% link_face_tag(@project, face) %>
+						</td>
+						<td class="today_comment">
+							<% if face != nil %>
+								<%= face.comment != '' ? face.comment : l(:no_comment) %>
+								<%= content_tag(:span, "#{l(:field_comment)}: #{face.responses.size}#{l(:comment_unit)}", class: "responseinfo") %>
+							<% end %>
+						</td>
           </tr>
           </table>
         </td>
@@ -41,8 +44,12 @@
       <td>
         <table class="calender">
         <tr>
-				<td><% concat(feeling_tag(@team_feelings[@dates[@dates.size - 1].day])) %></td>
-				<td class="comment"></td>
+					<% feeling = @team_feelings[Date.today.day] %>
+					<td class="today_face">
+						<% concat(feeling_tag(feeling)) %>
+					</td>
+				<td class="today_comment">
+				</td>
         </tr>
         </table>
       </td>

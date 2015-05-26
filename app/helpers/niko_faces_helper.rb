@@ -22,6 +22,26 @@ module NikoFacesHelper
     end
   end
 
+  # リンク付きの顔アイコンを出力する
+  # @param project [Project] プロジェクト
+  # @param face [NikoFace] 気分
+  def link_face_tag(project, face)
+    if face != nil
+      if face.has_unread_resnponses?(User.current)
+        notify = concat(image_tag('new.gif', {:plugin => 'redmine_nikoca_re', :alt => 'new'}) + tag(:br))
+      else
+        notify = ""
+      end
+
+      img_src = content_tag(:span) do
+        link_to(feeling_tag(face.feeling), project_niko_face_path(@project, face.id))
+      end
+
+      return concat(img_src)
+    else
+      return concat(feeling_tag(nil))
+    end
+  end
   # 顔アイコンを出力する
   # @param face [NikoFace] 気分
   def feeling_tag(feeling, alttext = nil)

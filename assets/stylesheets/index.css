@@ -38,8 +38,28 @@ table.calender td{
   text-align: center;
   vertical-align: middle;
 }
-.comment{
+table.calender th.today_comment{
 	width: 90%;
+  padding: 0;
+  border-right: solid 1px #eeeeee;
+  height: 40px;
+  text-align: center;
+  vertical-align: middle;
+}
+table.calender td.today_face{
+  padding: 0;
+  border-right: solid 1px #eeeeee;
+  height: 40px;
+  text-align: center;
+  vertical-align: middle;
+}
+table.calender td.today_comment{
+	width: 90%;
+  padding-left: 1%;
+  border-right: solid 1px #eeeeee;
+  height: 40px;
+  text-align: left;
+  vertical-align: middle;
 }
 .saturday{
   color: #0000FF;
