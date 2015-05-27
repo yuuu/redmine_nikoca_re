@@ -75,17 +75,13 @@ module NikoFacesHelper
       date_s = date.day.to_s
     end
 
-    if date.wday == 0
-      s = content_tag(:th, :class => 'sunday') do
-        concat(date_s)
-      end
-    elsif date.wday == 6
-      s = content_tag(:th, :class => 'saturday') do
-        concat(date_s)
-      end
-    else
-      s = content_tag(:th) do
-        concat(date_s)
+		s = content_tag(:th) do
+			if date.wday == 0
+        concat(link_to(date_s, project_niko_faces_oneday_path(@project, Date.today - date), class:'sunday'))
+			elsif date.wday == 6
+        concat(link_to(date_s, project_niko_faces_oneday_path(@project, Date.today - date), class:'saturday'))
+			else
+        concat(link_to(date_s, project_niko_faces_oneday_path(@project, Date.today - date)))
       end
     end
     concat(s)

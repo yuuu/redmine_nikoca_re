@@ -6,15 +6,15 @@
 <h2>ニコニコカレンダー</h2>
 <br style="clear:both;" />
 <div class="contextual">
-<% if @mode == "calendar" %>
-<%= link_to("1日表示", project_niko_faces_mode_path(@project, "today")) %>
+<% if @date == nil%>
+<%= link_to("1日表示", project_niko_faces_oneday_path(@project, 0)) %>
 <% else %>
-<%= link_to("カレンダー表示", project_niko_faces_mode_path(@project, "calendar")) %>
+<%= link_to("カレンダー表示", project_niko_faces_path(@project)) %>
 <% end %>
 </div>
 <br style="clear:both;" />
 
-<% if @mode == "calendar" %>
+<% if @date == nil%>
 <div class="backnumber">
   <%= link_to('<< 古いカレンダーへ', project_niko_faces_backnumber_path(@project, 1)) %>
 </div>

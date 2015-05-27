@@ -10,7 +10,7 @@
       <th>
         <table class="calender">
         <tr>
-				<% date_tag(Date.today, true) %>
+				<% date_tag(@date, true) %>
 				<th class="today_comment"><%= l(:label_comment_plural) %></th>
         </tr>
         </table>
@@ -24,7 +24,7 @@
         <td class="yyy">
           <table class="calender">
           <tr>
-						<% face = @niko_faces[user.name][Date.today.day] %>
+						<% face = @niko_faces[user.name][@date.day] %>
 						<td class="today_face">
 							<% link_face_tag(@project, face) %>
 						</td>
@@ -44,7 +44,7 @@
       <td>
         <table class="calender">
         <tr>
-					<% feeling = @team_feelings[Date.today.day] %>
+					<% feeling = @team_feelings[@date.day] %>
 					<td class="today_face">
 						<% concat(feeling_tag(feeling)) %>
 					</td>

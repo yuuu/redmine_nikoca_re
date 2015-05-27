@@ -47,7 +47,12 @@ class NikoFacesController < ApplicationController
 
   # ニコカレのカレンダーを表示する
   def index
-		@mode = params[:today] || "calendar"
+		days = params[:days]
+		if days != nil
+			@date = Date.today - days.to_i
+		else
+			@date = nil
+		end
   end
 
   # ニコカレの作成画面を表示する

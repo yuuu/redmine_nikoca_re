@@ -61,12 +61,11 @@ table.calender td.today_comment{
   text-align: left;
   vertical-align: middle;
 }
-.saturday{
-  color: #0000FF;
-}
-.sunday{
-  color: #FF0000;
-}
+
+th a:visited.saturday, th a:link.saturday, th a:hover.saturday, th a:active.saturday { color:#0000FF; text-decoration:none }
+th a:visited.sunday, th a:link.sunday, th a:hover.sunday, th a:active.sunday { color:#FF0000; text-decoration:none }
+th a:visited, th a:link, th a:hover, th a:active { color:#000000; text-decoration:none }
+
 table.feeling{
   width: 40%;
   text-align: center;
