@@ -50,6 +50,8 @@ class NikoFacesController < ApplicationController
 		days = params[:days]
 		if days != nil
 			@date = Date.today - days.to_i
+			@niko_faces = NikoFace.project_member_faces(@project, [@date])
+			@team_feelings = NikoFace.team_feelings(@project, [@date])
 		else
 			@date = nil
 		end
