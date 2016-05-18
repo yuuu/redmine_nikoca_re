@@ -19,5 +19,8 @@ fr:
   item_select: "Sélection"
   caption_feeling: "Humeur"
   caption_today_feeling: "Humeur du jour"
+  today: "aujourd'hui"
   to_old: "précédent"
   to_new: "suivant"
+  calendar: "calendrier"
+

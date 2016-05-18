@@ -19,6 +19,8 @@ en:
   item_select: "Select"
   caption_feeling: "Feeling"
   caption_today_feeling: "Today feeling"
+  today: "today"
   to_old: "previous"
   to_new: "next"
+  calendar: "calendar"
 
