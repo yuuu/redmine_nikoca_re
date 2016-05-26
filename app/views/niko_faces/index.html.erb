@@ -7,9 +7,9 @@
 <br style="clear:both;" />
 <div class="contextual">
 <% if @mode == "calendar" %>
-<%= link_to("1|próximo", project_niko_faces_mode_path(@project, "today")) %>
+<%= link_to("Visualizar", project_niko_faces_mode_path(@project, "today")) %>
 <% else %>
-<%= link_to("Ver mais", project_niko_faces_mode_path(@project, "calendar")) %>
+<%= link_to("Calendário", project_niko_faces_mode_path(@project, "calendar")) %>
 <% end %>
 </div>
 <br style="clear:both;" />
