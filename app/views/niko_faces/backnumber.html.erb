@@ -9,7 +9,7 @@
   <% if @backnumber == 0 %>
     <%= link_to('< ' + l(:to_old), project_niko_faces_backnumber_path(@project, 1)) %>
   <% else%>
-    <%= link_to('<' + l(:to_old), project_niko_faces_backnumber_path(@project, @backnumber + 1)) %>
+    <%= link_to('< ' + l(:to_old), project_niko_faces_backnumber_path(@project, @backnumber + 1)) %>
     <%= link_to(l(:to_new) + ' >', project_niko_faces_backnumber_path(@project, @backnumber - 1)) %>
   <% end %>
 </div>
