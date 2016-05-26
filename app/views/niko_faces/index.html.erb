@@ -7,16 +7,16 @@
 <br style="clear:both;" />
 <div class="contextual">
 <% if @mode == "calendar" %>
-<%= link_to("1日próximo", project_niko_faces_mode_path(@project, "today")) %>
+<%= link_to("1|próximo", project_niko_faces_mode_path(@project, "today")) %>
 <% else %>
-<%= link_to("nao sei o que é", project_niko_faces_mode_path(@project, "calendar")) %>
+<%= link_to("Ver mais", project_niko_faces_mode_path(@project, "calendar")) %>
 <% end %>
 </div>
 <br style="clear:both;" />
 
 <% if @mode == "calendar" %>
 <div class="backnumber">
-  <%= link_to('<< anterior', project_niko_faces_backnumber_path(@project, 1)) %>
+  <%= link_to('< anterior', project_niko_faces_backnumber_path(@project, 1)) %>
 </div>
 <%= render :partial => 'niko_faces/calender' %>
 <% else %>
