@@ -19,6 +19,8 @@ ja:
   item_select: "選択してください"
   caption_feeling: "の気分"
   caption_today_feeling: "本日の気分"
+  today: "1日表示"
   to_old: "古いカレンダーへ"
   to_new: "新しいカレンダーへ"
+  calendar: "カレンダー表示"
 
