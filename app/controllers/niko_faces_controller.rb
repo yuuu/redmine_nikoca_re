@@ -140,10 +140,6 @@ private
   # @param project [Project] カレントプロジェクト
   # @return [Array] ユーザリスト
   def get_users(project)
-    users = Array.new
-    project.members.each do |member|
-      users << member.user
-    end
-    return users
+    return project.assignable_users
   end
 end
