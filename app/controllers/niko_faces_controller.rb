@@ -140,6 +140,12 @@ private
   # @param project [Project] カレントプロジェクト
   # @return [Array] ユーザリスト
   def get_users(project)
-    return project.assignable_users
+    users = []
+    project.assignable_users.each do |user_or_group|
+      if user_or_group.kind_of?(User)
+        users << user_or_group
+      end
+    end
+    return users
   end
 end
