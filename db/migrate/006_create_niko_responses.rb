@@ -1,4 +1,4 @@
-class CreateNikoResponses < ActiveRecord::Migration
+class CreateNikoResponses < ActiveRecord::Migration[4.2]
   def change
     create_table :niko_responses do |t|
       t.integer :author_id

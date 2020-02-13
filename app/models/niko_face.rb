@@ -25,8 +25,6 @@ end
 class NikoFace < ActiveRecord::Base
   unloadable
 
-  attr_accessible :feeling, :comment
-
   validates_presence_of :feeling
   validates_length_of :comment, :maximum => 128
 
