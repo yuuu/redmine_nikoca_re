@@ -6,8 +6,8 @@
 class NikoResponsesController < ApplicationController
   unloadable
   menu_item :redmine_nikoca_re
-  before_filter :find_project
-  before_filter :find_niko_face
+  before_action :find_project
+  before_action :find_niko_face
 
   # レスポンス一覧を表示する
   def index
@@ -16,12 +16,12 @@ class NikoResponsesController < ApplicationController
 
   # レスポンスを作成する
   def create
-    @niko_response = NikoResponse.new(params[:niko_response])
+    @niko_response = NikoResponse.new(niko_response_params)
     @niko_response.author = User.current
     @niko_response.unread = true
     if @niko_response.valid?
       @niko_face.responses << @niko_response
-      NikoMailer.deliver_add_response(@project, @niko_face, @niko_response)
+      NikoMailer.add_response(User.current, @project, @niko_face, @niko_response).deliver
       redirect_to project_niko_face_path(@project, @niko_face.id)
     else
       render 'niko_faces/show'
@@ -41,5 +41,9 @@ private
     @niko_face = NikoFace.find(params[:niko_face_id])
   rescue ActiveRecord::RecordNotFound
     render_404
+  end
+
+  def niko_response_params
+    params.require(:niko_response).permit(:comment)
   end
 end

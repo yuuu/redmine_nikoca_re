@@ -7,7 +7,7 @@ class NikoMailer < Mailer
   # レスポンス追加を通知する
   # @params face [NikoFace] レスポンス先の気分
   # @params res [NikoResponse] レスポンス
-  def add_response(project, face, res)
+  def add_response(current_user, project, face, res)
     redmine_headers 'author' => res.author, 'owner' => face.author
     #message_id res
     #references face
